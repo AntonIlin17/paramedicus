@@ -65,11 +65,39 @@ Map them to EXACT field names from the form schema.
 
 Apply EMS domain knowledge for smart extraction:
 - backed into the wall at base -> classification: Vehicle Incident, occurrence_type: Station Related
-- gave a bear to a 5-year-old girl -> recipient_age: 5, recipient_gender: Female, recipient_type: Bystander (unless context says patient)
+- gave a bear to a 5-year-old girl -> recipient_age: 5, recipient_gender: Female
 - unit 4012 -> vehicle_number: 4012
 - my partner Lisa Patel, medic 10789 -> second_first_name: Lisa, second_last_name: Patel, second_medic_number: 10789
 - about 30 minutes ago -> calculate actual time from current time
 - no injuries -> context for observation field, incorporate it
+
+CRITICAL - RECIPIENT TYPE INFERENCE (Teddy Bear forms):
+You MUST infer recipient_type from contextual clues. Do NOT default to Bystander. Analyze the full context:
+
+PATIENT indicators (set recipient_type: Patient):
+- "at the hospital" / "in the hospital" / "hospitalized"
+- "after treatment" / "receiving treatment" / "being treated"
+- "post-surgery" / "after surgery" / "recovering"
+- "in the ER" / "emergency room" / "emergency department"
+- "admitted" / "discharged" / "in a bed"
+- "after the call" / "transported" / "we brought them in"
+- "sick" / "injured" / "hurt" / "in pain" (in medical context)
+- Any mention of medical care, diagnosis, or procedure
+- Child found in ambulance, hospital ward, clinic, or medical facility
+
+FAMILY indicators (set recipient_type: Family):
+- "mother" / "father" / "parent" / "sibling" / "brother" / "sister"
+- "family member" / "relative" / "son" / "daughter"
+- "waiting room" with family context
+- "patient's [relation]" (e.g., "patient's brother")
+
+BYSTANDER indicators (set recipient_type: Bystander):
+- "at the scene" with no medical context
+- "witness" / "onlooker" / "passerby"
+- "neighbor" / "friend" (non-family, non-patient)
+- Public location with no treatment context
+
+DEFAULT LOGIC: If a child is mentioned in ANY medical context (hospital, treatment, ambulance, ER, clinic, after a call), assume PATIENT unless explicitly stated otherwise. Paramedics primarily give bears to patients they treat.
 
 AUTO-FILL from profile (always pre-populate these without asking):
 - first_name, last_name from profile

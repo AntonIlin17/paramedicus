@@ -169,15 +169,52 @@ function localFallbackPipeline(session, userInput, context = {}) {
       updates.recipient_gender = 'Male';
       confidence.recipient_gender = 'high';
     }
+    // Recipient type inference with contextual clues
+    // Priority 1: Explicit keywords
     if (/\bpatient\b/.test(lower)) {
       updates.recipient_type = 'Patient';
       confidence.recipient_type = 'high';
-    } else if (/\bfamily\b/.test(lower)) {
+    } else if (/\bfamily\b|\bmother\b|\bfather\b|\bparent\b|\bsibling\b|\bbrother\b|\bsister\b/.test(lower)) {
       updates.recipient_type = 'Family';
       confidence.recipient_type = 'high';
-    } else if (/\bbystander\b/.test(lower)) {
+    } else if (/\bbystander\b|\bwitness\b|\bonlooker\b|\bpasserby\b/.test(lower)) {
       updates.recipient_type = 'Bystander';
       confidence.recipient_type = 'high';
+    }
+    // Priority 2: Contextual inference for Patient (medical context clues)
+    else if (includesAny(lower, [
+      /\bhospital\b/,
+      /\bafter treatment\b/,
+      /\breceiving treatment\b/,
+      /\bbeing treated\b/,
+      /\bpost[- ]?surgery\b/,
+      /\bafter surgery\b/,
+      /\brecovering\b/,
+      /\bin the e\.?r\.?\b/,
+      /\bemergency room\b/,
+      /\bemergency department\b/,
+      /\badmitted\b/,
+      /\bdischarged\b/,
+      /\bin a bed\b/,
+      /\bafter the call\b/,
+      /\btransported\b/,
+      /\bambulance\b/,
+      /\bclinic\b/,
+      /\bward\b/,
+      /\bmedical\b/,
+      /\binjured\b/,
+      /\bhurt\b/,
+      /\bsick\b/,
+      /\bdiagnos/,
+      /\bprocedure\b/,
+    ])) {
+      updates.recipient_type = 'Patient';
+      confidence.recipient_type = 'medium';
+    }
+    // Priority 3: Default to Patient if age is mentioned (paramedics primarily give bears to patients)
+    else if (updates.recipient_age) {
+      updates.recipient_type = 'Patient';
+      confidence.recipient_type = 'low';
     }
 
     const missing = getRequiredFieldKeys(formType).filter((key) => {

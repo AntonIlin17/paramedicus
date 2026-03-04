@@ -6,3 +6,4 @@ server/data/artifacts/*
 !server/data/artifacts/.gitkeep
 client/dist
 .DS_Store
+*.pdf
