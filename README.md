@@ -1,6 +1,7 @@
-# MEDICOS
+# Paramedicus
+Para (from Latin/Greek para, meaning "alongside," "beside," or "assistant") with medic (from Latin medicus, meaning "physician" or "doctor")
 
-MedicOS is a voice-first AI assistant for Ontario paramedics.
+Paramedicus is a voice-first AI assistant for Ontario paramedics.
 
 Core flow: **Talk -> auto-detect form -> fill live -> review -> generate PDF/XML -> preview email -> send**.
 
