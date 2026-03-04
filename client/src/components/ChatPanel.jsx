@@ -17,6 +17,7 @@ export default function ChatPanel({
   onStopSpeaking,
   suggestedActions,
   onSuggestedAction,
+  isConnected,
 }) {
   const scrollRef = useRef(null);
 
@@ -28,6 +29,12 @@ export default function ChatPanel({
 
   return (
     <div className="rounded-2xl border border-[var(--border)] bg-white shadow-sm">
+      {!isConnected && (
+        <div className="flex items-center gap-2 rounded-t-2xl bg-amber-50 border-b border-amber-200 px-4 py-2 text-xs text-amber-700">
+          <span className="inline-block h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
+          Connecting to server… responses will appear once connected.
+        </div>
+      )}
       <div ref={scrollRef} className="h-[62vh] overflow-auto border-b border-[var(--border)] px-4 py-4 space-y-3">
         {messages.map((message) => (
           <MessageBubble key={message.id} message={message} />

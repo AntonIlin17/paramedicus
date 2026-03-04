@@ -487,6 +487,7 @@ export default function App() {
             onStopSpeaking={stopSpeaking}
             suggestedActions={suggestedActions}
             onSuggestedAction={handleSuggestedAction}
+            isConnected={isConnected}
           />
         }
         right={rightPanel}
