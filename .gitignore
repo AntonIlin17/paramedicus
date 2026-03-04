@@ -1,0 +1,8 @@
+node_modules
+client/node_modules
+.env
+server/data/drafts.json
+server/data/artifacts/*
+!server/data/artifacts/.gitkeep
+client/dist
+.DS_Store

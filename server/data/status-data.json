@@ -1,0 +1,115 @@
+{
+  "summary": {
+    "description": "Paramedic Checklist - All items must be checked before the start of each shift. Any outstanding items must be addressed within the response guidelines.",
+    "paramedic": "ALL",
+    "revision": "20260225"
+  },
+  "items": [
+    {
+      "code": "ACRc",
+      "type": "ACR Completion",
+      "description": "Number of ACRs/PCRs that are unfinished",
+      "status": "BAD",
+      "issueCount": 2,
+      "notes": "Each must be completed with 24 hours of call completion"
+    },
+    {
+      "code": "ACEr",
+      "type": "ACE Response",
+      "description": "Number of ACE reviews requiring comment",
+      "status": "GOOD",
+      "issueCount": 0,
+      "notes": "Complete outstanding within 1 week of BH review"
+    },
+    {
+      "code": "CERT-DL",
+      "type": "Drivers License",
+      "description": "Drivers License Validity",
+      "status": "GOOD",
+      "issueCount": null,
+      "notes": "Drivers License Status"
+    },
+    {
+      "code": "CERT-Va",
+      "type": "Vaccinations",
+      "description": "Required vaccinations up to date",
+      "status": "BAD",
+      "issueCount": 1,
+      "notes": "Vaccination Status as per guidelines"
+    },
+    {
+      "code": "CERT-CE",
+      "type": "Education",
+      "description": "Continuous Education Status",
+      "status": "GOOD",
+      "issueCount": 0,
+      "notes": "CME outstanding"
+    },
+    {
+      "code": "UNIF",
+      "type": "Uniform",
+      "description": "Uniform credits",
+      "status": "GOOD",
+      "issueCount": 5,
+      "notes": "Available Uniform order Credits"
+    },
+    {
+      "code": "CRIM",
+      "type": "CRC",
+      "description": "Criminal Record Check",
+      "status": "GOOD",
+      "issueCount": 0,
+      "notes": "Criminal Issue Free"
+    },
+    {
+      "code": "ACP",
+      "type": "ACP Status",
+      "description": "If ACP, Cert Valid",
+      "status": "GOOD",
+      "issueCount": 0,
+      "notes": "ACP Status is good if ACP"
+    },
+    {
+      "code": "VAC",
+      "type": "Vacation",
+      "description": "Vacation Requested and approved",
+      "status": "GOOD",
+      "issueCount": 0,
+      "notes": "Yearly vacation approved"
+    },
+    {
+      "code": "MEALS",
+      "type": "Missed Meals",
+      "description": "Missed Meal Claims",
+      "status": "GOOD",
+      "issueCount": 0,
+      "notes": "Missed Meal Claims outstanding"
+    },
+    {
+      "code": "OVER",
+      "type": "Overtime Req.",
+      "description": "Overtime Requests outstanding",
+      "status": "BAD",
+      "issueCount": 1,
+      "notes": "Overtime claims outstanding"
+    }
+  ],
+  "referenceGuide": {
+    "ACRc": "Ambulance Call Report completed — patient forms started at end of emergency call but not signed/completed. Paramedics have 24 hours to complete.",
+    "ACEr": "Ambulance Call Evaluation — peer/review team review of completed ACR where issues were found. Must reply within 1 week.",
+    "CERT-DL": "All paramedics in Ontario must maintain a valid class F Drivers License to operate an ambulance.",
+    "CERT-Va": "All paramedics must maintain vaccination and inoculation as prescribed by the Ontario Ministry of Health.",
+    "CERT-CE": "Indicates whether the medic is up to date on continuous education. All medics must continually upgrade.",
+    "UNIF": "Medics are allowed to order uniforms at set intervals. If damaged, they can request new shirts, shoes, pants, etc.",
+    "CRIM": "All medics are reviewed routinely through a criminal record check.",
+    "ACP": "If the medic has upped their certification level to ACP (Advanced Care Paramedic).",
+    "VAC": "Paramedics can request yearly vacation time and they require approval.",
+    "MEALS": "When services get very busy they occasionally miss a meal. These are meal claim forms outstanding for approval.",
+    "OVER": "Medics occasionally work overtime if on a call when shift ends. These are overtime claim forms awaiting approval."
+  },
+  "criticalActions": [
+    "Complete 2 overdue ACR entries before end of current shift — each must be done within 24 hours of call completion.",
+    "Update vaccination records (CERT-Va) — 1 outstanding vaccination needs to be brought up to date per Ontario Ministry of Health guidelines.",
+    "Follow up on 1 outstanding overtime request (OVER) — submit or check status of overtime claim."
+  ]
+}

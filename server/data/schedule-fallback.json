@@ -1,0 +1,25 @@
+{
+  "source": "fallback",
+  "fetchedAt": "2026-03-03T14:00:00Z",
+  "links": [
+    "https://www.effectiveai.net/"
+  ],
+  "tables": [
+    {
+      "index": 0,
+      "source": "fallback",
+      "rows": [
+        ["Paramedic", "Unit", "Partner", "Shift", "Area", "Base", "Calls", "Status", "Notes"],
+        ["Adams, J.", "4012", "Baker, T.", "07:00 - 19:00", "North", "Station 1", "6", "Active", ""],
+        ["Chen, L.", "4018", "Diaz, R.", "07:00 - 19:00", "South", "Station 3", "4", "Active", "Vehicle check required"],
+        ["Evans, M.", "4025", "Foster, K.", "19:00 - 07:00", "East", "Station 2", "0", "Scheduled", ""],
+        ["Garcia, S.", "4031", "Hall, P.", "07:00 - 19:00", "West", "Station 4", "8", "Complete", "OT approved"],
+        ["Ingram, D.", "4009", "Jones, A.", "19:00 - 07:00", "Central", "Station 1", "0", "Scheduled", ""],
+        ["Kim, Y.", "4044", "Lopez, C.", "07:00 - 19:00", "North", "Station 2", "5", "Active", ""],
+        ["Martin, R.", "4015", "Nguyen, H.", "07:00 - 19:00", "South", "Station 3", "7", "Complete", "Late finish"],
+        ["O'Brien, T.", "4022", "Patel, N.", "19:00 - 07:00", "East", "Station 1", "0", "Scheduled", ""]
+      ]
+    }
+  ],
+  "text": "Active units include 4012, 4018, and 4044. Scheduled night units include 4025, 4009, and 4022. Completed shifts include units 4031 and 4015."
+}
