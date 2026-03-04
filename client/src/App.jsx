@@ -132,21 +132,26 @@ export default function App() {
 
         setMessages(hydrateSessionMessages(session.messages));
 
+        // Use pre-built formStates from server (includes schemas and validation)
+        const serverFormStates = event.payload?.formStates || {};
         const activeForms = session.activeForms || {};
         const firstActive = Object.keys(activeForms)[0] || null;
 
-        const nextFormStates = Object.fromEntries(
-          Object.entries(activeForms).map(([formType, data]) => [
-            formType,
-            {
-              formType,
-              schema: null,
-              fields: data?.fields || {},
-              confidence: data?.confidence || {},
-              validation: null,
-            },
-          ]),
-        );
+        // If server sent formStates, use them; otherwise fallback to old behavior
+        const nextFormStates = Object.keys(serverFormStates).length > 0
+          ? serverFormStates
+          : Object.fromEntries(
+              Object.entries(activeForms).map(([formType, data]) => [
+                formType,
+                {
+                  formType,
+                  schema: null,
+                  fields: data?.fields || {},
+                  confidence: data?.confidence || {},
+                  validation: null,
+                },
+              ]),
+            );
 
         setFormStates(nextFormStates);
         setCurrentForm(session.currentForm || firstActive || null);

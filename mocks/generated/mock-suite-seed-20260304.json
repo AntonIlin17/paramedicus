@@ -1,0 +1,372 @@
+{
+  "meta": {
+    "generatedAt": "2026-03-04T09:36:18.970Z",
+    "seed": 20260304,
+    "count": 3,
+    "validOnly": false,
+    "sourceDocuments": {
+      "challengeOutline": "Hackathon Challenge Outline V07.pdf",
+      "checklist": "Paramedic Checklist V01.pdf",
+      "extractedSummary": {
+        "checklistRevision": "20260225",
+        "criticalBadCodes": [
+          "ACRc",
+          "CERT-Va",
+          "OVER"
+        ],
+        "taskFocus": "Voice-first paramedic assistant that fills occurrence/teddy-bear forms, then supports PDF/XML export and email send with manual review."
+      }
+    },
+    "notes": "Generated mock datasets and expected test assertions."
+  },
+  "profiles": [
+    {
+      "id": "profile-acp-01",
+      "firstName": "Jamie",
+      "lastName": "Adams",
+      "medicNumber": "10452",
+      "badgeNumber": "B-3047",
+      "role": "Advanced Care Paramedic",
+      "service": "EAI Ambulance Service",
+      "vehicleNumber": "4012"
+    },
+    {
+      "id": "profile-pcp-02",
+      "firstName": "Lisa",
+      "lastName": "Patel",
+      "medicNumber": "10789",
+      "badgeNumber": "B-3182",
+      "role": "Primary Care Paramedic",
+      "service": "Muskoka Paramedic Services",
+      "vehicleNumber": "4022"
+    }
+  ],
+  "statusSnapshot": {
+    "summary": {
+      "revision": "20260225",
+      "paramedic": "ALL"
+    },
+    "badItems": [
+      "ACRc",
+      "CERT-Va",
+      "OVER"
+    ],
+    "criticalActionsCount": 3
+  },
+  "scheduleSnapshot": {
+    "source": "fallback",
+    "activeUnits": [
+      "4012",
+      "4018",
+      "4044"
+    ],
+    "scheduledNightUnits": [
+      "4025",
+      "4009",
+      "4022"
+    ]
+  },
+  "formCases": [
+    {
+      "id": "occ-1-valid",
+      "formType": "occurrence",
+      "formData": {
+        "date": "2026-09-22",
+        "time": "20:45",
+        "classification": "Other",
+        "occurrence_type": "Non-Call Related",
+        "brief_description": "Generated incident 1 - other",
+        "service": "EAI Ambulance Service",
+        "vehicle_number": "4012",
+        "role": "Advanced Care Paramedic",
+        "badge_number": "B-3047",
+        "observation": "Generated observation 1. No patient injury reported.",
+        "requested_by": "Operations Lead",
+        "report_creator": "Jamie Adams"
+      },
+      "expected": {
+        "canExport": true,
+        "errorFields": [],
+        "warningFields": []
+      },
+      "xmlExpectation": null
+    },
+    {
+      "id": "tb-1-valid",
+      "formType": "teddybear",
+      "formData": {
+        "form_number": "TB-1709500000001",
+        "date_time": "2026-04-19T18:36",
+        "first_name": "Jamie",
+        "last_name": "Adams",
+        "medic_number": "10452",
+        "recipient_age": 8,
+        "recipient_gender": "Male",
+        "recipient_type": "Patient"
+      },
+      "expected": {
+        "canExport": true,
+        "errorFields": [],
+        "warningFields": []
+      },
+      "xmlExpectation": {
+        "hasSecondMedic": false,
+        "hasRecipient": true,
+        "hasPrimaryMedic": true
+      }
+    },
+    {
+      "id": "occ-1-missing_required",
+      "formType": "occurrence",
+      "formData": {
+        "date": "2026-08-13",
+        "time": "00:22",
+        "classification": "Other",
+        "occurrence_type": "Call Related",
+        "brief_description": "Generated incident 1 - other",
+        "service": "EAI Ambulance Service",
+        "vehicle_number": "4012",
+        "role": "Advanced Care Paramedic",
+        "badge_number": "B-3047",
+        "report_creator": "Jamie Adams"
+      },
+      "expected": {
+        "canExport": false,
+        "errorFields": [
+          "observation",
+          "requested_by"
+        ],
+        "warningFields": []
+      },
+      "xmlExpectation": null
+    },
+    {
+      "id": "tb-1-bad_primary_medic",
+      "formType": "teddybear",
+      "formData": {
+        "form_number": "TB-1709500000001",
+        "date_time": "2026-08-12T17:45",
+        "first_name": "Jamie",
+        "last_name": "Adams",
+        "medic_number": "5321",
+        "recipient_age": 11,
+        "recipient_gender": "Other",
+        "recipient_type": "Family"
+      },
+      "expected": {
+        "canExport": false,
+        "errorFields": [
+          "medic_number"
+        ],
+        "warningFields": []
+      },
+      "xmlExpectation": {
+        "hasSecondMedic": false,
+        "hasRecipient": true,
+        "hasPrimaryMedic": true
+      }
+    },
+    {
+      "id": "occ-2-valid",
+      "formType": "occurrence",
+      "formData": {
+        "date": "2026-04-08",
+        "time": "02:06",
+        "classification": "Vehicle Incident",
+        "occurrence_type": "Station Related",
+        "brief_description": "Generated incident 2 - vehicle incident",
+        "service": "EAI Ambulance Service",
+        "vehicle_number": "4012",
+        "role": "Advanced Care Paramedic",
+        "badge_number": "B-3047",
+        "observation": "Generated observation 2. No patient injury reported.",
+        "requested_by": "Operations Lead",
+        "report_creator": "Jamie Adams"
+      },
+      "expected": {
+        "canExport": true,
+        "errorFields": [],
+        "warningFields": []
+      },
+      "xmlExpectation": null
+    },
+    {
+      "id": "tb-2-valid",
+      "formType": "teddybear",
+      "formData": {
+        "form_number": "TB-1709500000002",
+        "date_time": "2026-01-09T01:38",
+        "first_name": "Jamie",
+        "last_name": "Adams",
+        "medic_number": "10452",
+        "recipient_age": 9,
+        "recipient_gender": "Other",
+        "recipient_type": "Bystander"
+      },
+      "expected": {
+        "canExport": true,
+        "errorFields": [],
+        "warningFields": []
+      },
+      "xmlExpectation": {
+        "hasSecondMedic": false,
+        "hasRecipient": true,
+        "hasPrimaryMedic": true
+      }
+    },
+    {
+      "id": "occ-2-missing_required",
+      "formType": "occurrence",
+      "formData": {
+        "date": "2026-07-28",
+        "time": "08:21",
+        "classification": "Equipment Failure",
+        "occurrence_type": "Non-Call Related",
+        "brief_description": "Generated incident 2 - equipment failure",
+        "service": "EAI Ambulance Service",
+        "vehicle_number": "4012",
+        "role": "Advanced Care Paramedic",
+        "badge_number": "B-3047",
+        "report_creator": "Jamie Adams"
+      },
+      "expected": {
+        "canExport": false,
+        "errorFields": [
+          "observation",
+          "requested_by"
+        ],
+        "warningFields": []
+      },
+      "xmlExpectation": null
+    },
+    {
+      "id": "tb-2-bad_primary_medic",
+      "formType": "teddybear",
+      "formData": {
+        "form_number": "TB-1709500000002",
+        "date_time": "2026-06-03T11:30",
+        "first_name": "Jamie",
+        "last_name": "Adams",
+        "medic_number": "2099",
+        "second_first_name": "Taylor",
+        "second_last_name": "Wong",
+        "second_medic_number": "95446",
+        "recipient_age": 6,
+        "recipient_gender": "Male",
+        "recipient_type": "Family"
+      },
+      "expected": {
+        "canExport": false,
+        "errorFields": [
+          "medic_number"
+        ],
+        "warningFields": []
+      },
+      "xmlExpectation": {
+        "hasSecondMedic": true,
+        "hasRecipient": true,
+        "hasPrimaryMedic": true
+      }
+    },
+    {
+      "id": "occ-3-valid",
+      "formType": "occurrence",
+      "formData": {
+        "date": "2026-10-07",
+        "time": "01:44",
+        "classification": "Workplace Injury",
+        "occurrence_type": "Call Related",
+        "brief_description": "Generated incident 3 - workplace injury",
+        "service": "Muskoka Paramedic Services",
+        "vehicle_number": "4022",
+        "role": "Primary Care Paramedic",
+        "badge_number": "B-3182",
+        "observation": "Generated observation 3. No patient injury reported.",
+        "requested_by": "Supervisor Chen",
+        "report_creator": "Lisa Patel"
+      },
+      "expected": {
+        "canExport": true,
+        "errorFields": [],
+        "warningFields": []
+      },
+      "xmlExpectation": null
+    },
+    {
+      "id": "tb-3-valid",
+      "formType": "teddybear",
+      "formData": {
+        "form_number": "TB-1709500000003",
+        "date_time": "2026-10-07T19:04",
+        "first_name": "Lisa",
+        "last_name": "Patel",
+        "medic_number": "10789"
+      },
+      "expected": {
+        "canExport": true,
+        "errorFields": [],
+        "warningFields": []
+      },
+      "xmlExpectation": {
+        "hasSecondMedic": false,
+        "hasRecipient": false,
+        "hasPrimaryMedic": true
+      }
+    },
+    {
+      "id": "occ-3-bad_vehicle",
+      "formType": "occurrence",
+      "formData": {
+        "date": "2026-03-05",
+        "time": "16:31",
+        "classification": "Vehicle Incident",
+        "occurrence_type": "Vehicle Related",
+        "brief_description": "Generated incident 3 - vehicle incident",
+        "service": "Muskoka Paramedic Services",
+        "vehicle_number": "818",
+        "role": "Primary Care Paramedic",
+        "badge_number": "B-3182",
+        "observation": "Generated observation 3. No patient injury reported.",
+        "requested_by": "Supervisor Chen",
+        "report_creator": "Lisa Patel"
+      },
+      "expected": {
+        "canExport": true,
+        "errorFields": [],
+        "warningFields": [
+          "vehicle_number"
+        ]
+      },
+      "xmlExpectation": null
+    },
+    {
+      "id": "tb-3-bad_primary_medic",
+      "formType": "teddybear",
+      "formData": {
+        "form_number": "TB-1709500000003",
+        "date_time": "2026-11-02T08:48",
+        "first_name": "Lisa",
+        "last_name": "Patel",
+        "medic_number": "8387",
+        "second_first_name": "Jordan",
+        "second_last_name": "Brown",
+        "second_medic_number": "97940",
+        "recipient_age": 11,
+        "recipient_gender": "Other",
+        "recipient_type": "Bystander"
+      },
+      "expected": {
+        "canExport": false,
+        "errorFields": [
+          "medic_number"
+        ],
+        "warningFields": []
+      },
+      "xmlExpectation": {
+        "hasSecondMedic": true,
+        "hasRecipient": true,
+        "hasPrimaryMedic": true
+      }
+    }
+  ]
+}

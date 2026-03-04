@@ -15,6 +15,8 @@ import scheduleRoutes from './routes/schedule.js';
 import statusRoutes from './routes/status.js';
 import voiceRoutes from './routes/voice.js';
 import { handleWSMessage } from './ws/handler.js';
+import { getFormSchema } from './forms/schemas.js';
+import { validateForm } from './forms/validation.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -73,12 +75,34 @@ wss.on('connection', (ws, req) => {
     }
 
     const session = sessionManager.get(sessionId);
+
+    // Build form states with schemas for any active forms
+    const formStates = {};
+    if (session.activeForms) {
+      for (const [formType, formData] of Object.entries(session.activeForms)) {
+        const schema = getFormSchema(formType);
+        if (schema) {
+          const fields = formData?.fields || {};
+          const confidence = formData?.confidence || {};
+          const validation = validateForm(formType, fields, schema, confidence);
+          formStates[formType] = {
+            formType,
+            fields,
+            confidence,
+            validation,
+            schema,
+          };
+        }
+      }
+    }
+
     ws.send(
       JSON.stringify({
         type: 'session_init',
         payload: {
           sessionId,
           session,
+          formStates,
         },
       }),
     );

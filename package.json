@@ -8,7 +8,8 @@
     "dev:server": "node --watch server/index.js",
     "start": "node server/index.js",
     "install-all": "npm install && npm --prefix client install",
-    "test": "node --test"
+    "test": "node --test --test-isolation=none",
+    "mock:generate": "node scripts/generate-mocks.js --with-tests"
   },
   "dependencies": {
     "cheerio": "^1.0.0",

@@ -53,3 +53,25 @@ DEFAULT_RECIPIENT=Team00@EffectiveAI.net
 ```bash
 npm test
 ```
+
+## Mock Data And Test Case Generation
+Curated mock fixtures are stored in `mocks/mock-datasets.js` and validated by `tests/mock-datasets.test.js`.
+
+Generate on-demand datasets and optional runnable test files:
+
+```bash
+# default generator (writes JSON + test file under mocks/generated)
+npm run mock:generate
+
+# custom run
+node scripts/generate-mocks.js --count 12 --seed 20260304 --output mocks/generated --with-tests
+
+# optional: generate only valid cases
+node scripts/generate-mocks.js --count 20 --valid-only
+```
+
+If `--with-tests` is used, run the generated test file:
+
+```bash
+node --test mocks/generated/<generated-file>.test.js
+```
